@@ -38,7 +38,6 @@ function addColor(num) {
     if (board[num - 1][i] === 0) {
       board[num - 1][i] = turn;
       document.querySelector(`#c${num}r${i + 1}`).style.backgroundColor = turn
-      console.log(checkWinner())
       if (checkWinner()) {  
         document.querySelector(".popup").style.display = "flex"
         document.querySelector("#text").innerHTML = `${turn} won.`
@@ -50,8 +49,6 @@ function addColor(num) {
         turn = "Blue"
       }
       }
-      
-      console.log(board)
       break;
     }
   }
@@ -70,10 +67,9 @@ function addColor(num) {
 }
 
 function checkWinner() {
-  console.log('poop', board);
-  // Check horizontal
-  for (let i = 0; i < 6; i++) {
-    for (let j = 0; j < 4; j++) {
+  // Check vertical
+  for (let i = 0; i < 7; i++) {
+    for (let j = 0; j < 3; j++) {
       if (board[i][j] === turn &&
           board[i][j+1] === turn &&
           board[i][j+2] === turn &&
@@ -83,9 +79,9 @@ function checkWinner() {
     }
   }
 
-  // Check vertical
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 7; j++) {
+  // Check horizontal 
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 6; j++) {
       if (board[i][j] === turn &&
           board[i+1][j] === turn &&
           board[i+2][j] === turn &&
@@ -95,9 +91,9 @@ function checkWinner() {
     }
   }
 
-  // Check diagonal (top-left to bottom-right)
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 4; j++) {
+  // Check diagonal (bottom-left to top-right)
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 3; j++) {
       if (board[i][j] === turn &&
           board[i+1][j+1] === turn &&
           board[i+2][j+2] === turn &&
@@ -107,13 +103,13 @@ function checkWinner() {
     }
   }
 
-  // Check diagonal (bottom-left to top-right)
-  for (let i = 3; i < 6; i++) {
-    for (let j = 0; j < 4; j++) {
+  // Check diagonal (top-left to bottom-right)
+  for (let i = 0; i < 4; i++) {
+    for (let j = 2; j < 6; j++) {
       if (board[i][j] === turn &&
-          board[i-1][j+1] === turn &&
-          board[i-2][j+2] === turn &&
-          board[i-3][j+3] === turn) {
+          board[i+1][j-1] === turn &&
+          board[i+2][j-2] === turn &&
+          board[i+3][j-3] === turn) {
         return true;
       }
     }
@@ -124,20 +120,20 @@ function checkWinner() {
 }
 function eventListen() {
   document.querySelector("button").addEventListener("click", ()=> {
-  board = [
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0],
-  ]
-  document.querySelector(".popup").style.display = "none"  
-  for(let i = 1; i < 8; i++) {
-    for(let j = 1; j < 7; j++) {
-      document.querySelector(`#c${i}r${j}`).style.backgroundColor = "white"
+    board = [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+    ]
+    document.querySelector(".popup").style.display = "none"  
+    for(let i = 1; i < 8; i++) {
+      for(let j = 1; j < 7; j++) {
+        document.querySelector(`#c${i}r${j}`).style.backgroundColor = "white"
+      }
     }
-  }
-})
+  })
 }
